@@ -54,9 +54,10 @@ create_avd(){
 
     yes | sdkmanager --licenses
 
+    download_and_unzip_if_missed "sdk/emulator" "https://dl.google.com/android/repository/" "emulator-linux-5889189.zip"
+
     echo "yes" |
           sdkmanager --no_https \
-            "emulator" \
             "platform-tools" \
             "platforms;android-24" \
             "system-images;android-24;default;${ABI}"
