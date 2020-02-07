@@ -376,8 +376,8 @@ pub extern fn vcx_credential_get_request_msg(command_handle: CommandHandle,
                                              credential_handle: u32,
                                              my_pw_did: *const c_char,
                                              their_pw_did: *const c_char,
-                                             payment_handle: u32,
-                                             cb: Option<extern fn(xcommand_handle: u32, err: u32, msg: *const c_char)>) -> u32 {
+                                             _payment_handle: u32,
+                                             cb: Option<extern fn(xcommand_handle: CommandHandle, err: u32, msg: *const c_char)>) -> u32 {
     info!("vcx_credential_get_request_msg >>>");
 
     check_useful_c_str!(my_pw_did, VcxErrorKind::InvalidOption);

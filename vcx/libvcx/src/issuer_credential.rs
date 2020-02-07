@@ -696,9 +696,9 @@ pub fn from_string(credential_data: &str) -> VcxResult<u32> {
 }
 
 pub fn generate_credential_offer_msg(handle: u32) -> VcxResult<(String, String)> {
-    ISSUER_CREDENTIAL_MAP.get_mut(handle, |i| {
+    ISSUER_CREDENTIAL_MAP.get_mut(handle, |obj| {
         match obj {
-            IssuerCredentials::V1(ref mut obj) => obj.generate_credential_offer_msg(connection_handle),
+            IssuerCredentials::V1(ref mut obj) => obj.generate_credential_offer_msg(),
             IssuerCredentials::V3(_) => Err(VcxError::from(VcxErrorKind::InvalidIssuerCredentialHandle)), // TODO: implement
         }
     })
@@ -719,7 +719,7 @@ pub fn send_credential_offer(handle: u32, connection_handle: u32) -> VcxResult<u
 }
 
 pub fn generate_credential_msg(handle: u32, my_pw_did: &str) -> VcxResult<String> {
-    ISSUER_CREDENTIAL_MAP.get_mut(handle, |i| {
+    ISSUER_CREDENTIAL_MAP.get_mut(handle, |obj| {
         match obj {
             IssuerCredentials::V1(ref mut obj) => obj.generate_credential_msg(my_pw_did),
             IssuerCredentials::V3(_) => Err(VcxError::from(VcxErrorKind::InvalidIssuerCredentialHandle)), // TODO: implement

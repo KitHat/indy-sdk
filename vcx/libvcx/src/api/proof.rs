@@ -597,9 +597,9 @@ pub extern fn vcx_get_proof(command_handle: CommandHandle,
 /// #Returns
 /// Error code as a u32
 #[no_mangle]
-pub extern fn vcx_get_proof_msg(command_handle: u32,
+pub extern fn vcx_get_proof_msg(command_handle: CommandHandle,
                                 proof_handle: u32,
-                                cb: Option<extern fn(xcommand_handle: u32, err: u32, proof_state:u32, response_data: *const c_char)>) -> u32 {
+                                cb: Option<extern fn(xcommand_handle: CommandHandle, err: u32, proof_state:u32, response_data: *const c_char)>) -> u32 {
     info!("vcx_get_proof_msg >>>");
 
     check_useful_c_callback!(cb, VcxErrorKind::InvalidOption);
@@ -609,9 +609,9 @@ pub extern fn vcx_get_proof_msg(command_handle: u32,
     error::SUCCESS.code_num
 }
 
-fn proof_to_cb(command_handle: u32,
+fn proof_to_cb(command_handle: CommandHandle,
                proof_handle: u32,
-               cb: extern fn(xcommand_handle: u32, err: u32, proof_state:u32, response_data: *const c_char))
+               cb: extern fn(xcommand_handle: CommandHandle, err: u32, proof_state:u32, response_data: *const c_char))
                -> VcxResult<()>{
     proof_api_input_validation(command_handle, proof_handle)?;
 
@@ -638,7 +638,7 @@ fn proof_to_cb(command_handle: u32,
     Ok(())
 }
 
-fn proof_api_input_validation(command_handle: u32, proof_handle: u32) -> VcxResult<()> {
+fn proof_api_input_validation(command_handle: CommandHandle, proof_handle: u32) -> VcxResult<()> {
 
     let source_id = proof::get_source_id(proof_handle).unwrap_or_default();
     trace!("vcx_get_proof(command_handle: {}, proof_handle: {}) source_id: {}",
