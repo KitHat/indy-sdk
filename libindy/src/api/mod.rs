@@ -11,8 +11,8 @@ pub mod pool;
 pub mod wallet;
 
 //pub mod metrics;
-//pub mod payments;
-//pub mod payments_v2;
+pub mod payments;
+pub mod payments_v2;
 
 use indy_api_types::{errors::prelude::*, validation::Validatable, ErrorCode};
 use indy_utils::ctypes;

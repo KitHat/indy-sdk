@@ -5,7 +5,7 @@ mod ledger;
 mod pool;
 mod wallet;
 
-// pub mod payments;
+pub mod payments;
 // pub mod metrics;
 
 pub(crate) use anoncreds::{
